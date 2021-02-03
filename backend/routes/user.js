@@ -8,6 +8,7 @@ const {
 	updateUser,
 	updateUserPassword,
 	userPurchaseList,
+	updateUserEmail,
 } = require("../controllers/user");
 const {
 	isSignedIn,
@@ -48,6 +49,17 @@ router.put(
 	isAuthenticated,
 	authorizeChange,
 	updateUserPassword
+);
+//change email
+router.put(
+	"/user/email-reset/:userId",
+	[
+		check("email")
+			.isLength({ min: 10 }),
+	],
+	isSignedIn,
+	isAuthenticated,
+	updateUserEmail
 );
 
 router.get(

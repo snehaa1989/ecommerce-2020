@@ -17,6 +17,7 @@ import UpdateCategory from "./admin/UpdateCategory";
 import Cart from "./core/Cart";
 import OurProducts from "./core/OurProducts";
 import PasswordReset from "./user/PasswordReset";
+import EmailReset from "./user/EmailReset";
 
 const Routes = () => {
   return (
@@ -34,6 +35,11 @@ const Routes = () => {
           exact
           path="/user/password-reset"
           component={PasswordReset}
+        />
+        <PrivateRoute
+          exact
+          path="/user/email-reset"
+          component={EmailReset}
         />
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute

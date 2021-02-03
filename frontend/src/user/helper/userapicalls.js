@@ -41,3 +41,17 @@ export const updatePassword = (userId, token, data) => {
 		.then((response) => response.json())
 		.catch((err) => err.json());
 };
+export const updateEmail = (userId, token, data) => {
+	return fetch(`${API}/user/email-reset/${userId}`, {
+		method: "PUT",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(data),
+	})
+		.then((response) => response.json())
+		.catch((err) => err.json());
+};
+

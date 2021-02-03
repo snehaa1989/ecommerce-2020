@@ -82,6 +82,36 @@ exports.updateUserPassword = (req, res) => {
 	});
 };
 
+exports.updateUserEmail = (req, res) => {
+	User.findById({ _id: req.profile._id }, (err, user) => {
+		if (err) {
+			return res.status(400).json({
+				error: err,
+			});
+		}
+		if (!user) {
+			return res.status(400).json({
+				error: "Bad Request: User not found in DB!",
+			});
+		}
+		user.email = req.body.newEmail;
+		user.save((err, updatedUser) => {
+			if (err) {
+				return res.status(400).json({
+					error: err,
+				});
+			}
+			if (!updatedUser) {
+				return res.status(400).json({
+					error: "Error while saving the updated user data.",
+				});
+			}
+			
+			return res.json(updatedUser);
+		});
+	});
+};
+
 exports.userPurchaseList = (req, res) => {
 	Order.find({ user: req.profile._id })
 		.populate("user", "_id name")
